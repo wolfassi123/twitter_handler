@@ -119,6 +119,10 @@ class Streamer(StreamingClient):
 # test.delete_all_rules()
 
 # test.filter(tweet_fields=["created_at"])
-
+# test.filter(tweet_fields=['created_at','attachments','context_annotations','conversation_id','entities','in_reply_to_user_id','lang','possibly_sensitive','public_metrics','referenced_tweets','reply_settings','source'],
+#             expansions=['author_id','referenced_tweets.id','in_reply_to_user_id','attachments.media_keys','attachments.poll_ids','entities.mentions.username','referenced_tweets.id.author_id'],
+#             user_fields=['created_at','description','entities','location','pinned_tweet_id','profile_image_url','protected','public_metrics','url','verified'],
+#             poll_fields=['duration_minutes','end_datetime','voting_status'],
+#             media_fields=['url','duration_ms','height','preview_image_url','public_metrics','alt_text','variants'])
 
 # test.delete_all_rules()
