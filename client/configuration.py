@@ -8,3 +8,4 @@ class Configuration():
     access_token : str
     access_token_secret : str
     bearer_token : str
+    return_type = dict

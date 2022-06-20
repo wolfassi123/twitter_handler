@@ -12,13 +12,13 @@ class User:
         self.__client = client
 
     ## This is the function that allows us to seperate between passing a string(username) or an int(id) along with the desired informations.
-    def getUserInfo(self,info, requested_fields:list = []):
-         return self._getUserInfo(info,requested_fields)
+    def getUserInfo(self, info, requested_fields: list = []):
+        return self._getUserInfo(info, requested_fields)
 
     ## The two dispatch are used to call the same function, but once by using the username of a user, and once using the id.
     ## the _getUserInfo will allow us to get information concerning the specific user.
     @dispatch(int, list)
-    def _getUserInfo(self, info: int, requested_fields:list=[]):
+    def _getUserInfo(self, info: int, requested_fields: list = []):
         user = self.__client.get_user(
             id=info,
             user_fields=[
@@ -30,17 +30,17 @@ class User:
                 "protected",
             ],
         )
-        userdata = user.data
+        userdata = user["data"]
         user_data = dict()
-        user_data["username"] = userdata.username
-        user_data["id"] = userdata.id
+        user_data["username"] = userdata["username"]
+        user_data["id"] = userdata["id"]
         if requested_fields:
             for arg in requested_fields:
                 user_data[arg] = userdata[arg]
         return user_data
-        
-    @dispatch(str,list)
-    def _getUserInfo(self, info: str, requested_fields:list = []):
+
+    @dispatch(str, list)
+    def _getUserInfo(self, info: str, requested_fields: list = []):
         # print(type(self.__client))
         user = self.__client.get_user(
             username=info,
@@ -54,10 +54,10 @@ class User:
             ],
         )
 
-        userdata = user.data
+        userdata = user["data"]
         user_data = dict()
-        user_data["username"] = userdata.username
-        user_data["id"] = userdata.id
+        user_data["username"] = userdata["username"]
+        user_data["id"] = userdata["id"]
         if requested_fields:
             for arg in requested_fields:
                 user_data[arg] = userdata[arg]
@@ -68,11 +68,11 @@ class User:
         user = self.getUserInfo(info)
         userid = user["id"]
         userfollowers = self.__client.get_users_followers(id=userid)
-        userfollowers_data = userfollowers.data
+        userfollowers_data = userfollowers["data"]
         followers = []
         for follower in userfollowers_data:
-            followers.append(follower.username)
-            #print(follower.id)
+            followers.append(follower["username"])
+            # print(follower['id'])
         return followers
 
     ## This function will allow us to get the usernames of a certain user's followings (Who the user follows)
@@ -80,36 +80,38 @@ class User:
         user = self.getUserInfo(user)
         userid = user["id"]
         userfollowings = self.__client.get_users_following(id=userid)
-        userfollowings_data = userfollowings.data
+        userfollowings_data = userfollowings["data"]
         friends = []
         for friend in userfollowings_data:
             # friends.append(self.getUserInfo(friend))
-            friends.append(friend.username)
+            friends.append(friend["username"])
         return friends
 
     ## This function will allow us to get the tweets where a certain user is mentioned.
     def getUserMentions(self, user):
         user = self.getUserInfo(user)
-        # user_data = user.data
-        userid = user['id']
+        # user_data = user['data']
+        userid = user["id"]
         user_tweets = self.__client.get_users_mentions(id=userid)
         tweets = {}
-        for tweet in user_tweets.data:
-            tweets[f"{tweet.id}"] = tweet.text
+        for tweet in user_tweets["data"]:
+            tweets[f"{tweet['id']}"] = tweet["text"]
         return tweets
 
     ## This function will allow us to get the Timeline of a certain user.
     def getUserTimeline(self, user):
         user = self.getUserInfo(user)
         userid = user["id"]
-        user_tweets = self.__client.get_users_tweets(id=userid,tweet_fields = ['public_metrics'])
-        user_tweets_data = user_tweets.data
+        user_tweets = self.__client.get_users_tweets(
+            id=userid, tweet_fields=["public_metrics"]
+        )
+        user_tweets_data = user_tweets["data"]
         tweets = {}
-        for tweet in user_tweets.data:
+        for tweet in user_tweets["data"]:
             tweet_data = {}
-            tweet_data['text'] = tweet.text
-            tweet_data['public_metrics'] = tweet['public_metrics']
-            tweets[f"{tweet.id}"] = tweet_data
+            tweet_data["text"] = tweet["text"]
+            tweet_data["public_metrics"] = tweet["public_metrics"]
+            tweets[f"{tweet['id']}"] = tweet_data
         return tweets
 
     ## This function will allow us to get the Timeline of a certain user.

@@ -1,3 +1,4 @@
+# %%
 import os
 from client import configuration
 
@@ -22,11 +23,11 @@ con = configuration.Configuration(
 )
 
 
-c = client.Client(con)
+# c = client.Client(con)
 # user = c.user
 # name = user.getUserInfo("JadSadaka")
 # print(name)
-# answer = user.getUserInfo("JadSadaka",'public_metrics')
+# answer = user.getUserInfo("JadSadaka", ['public_metrics'])
 # print(answer)
 # answer = user.getUserFollowers("fadybaly")
 # print(answer)
@@ -34,7 +35,7 @@ c = client.Client(con)
 # print(answer)
 # answer = user.getUserMentions("fadybaly")
 # print(answer)
-# answer = user.getUserTImeline("fadybaly")
+# answer = user.getUserTimeline("fadybaly")
 # print(answer)
 # answer = user.getBookmarks("fadybaly")
 # print(answer)
@@ -67,7 +68,7 @@ c = client.Client(con)
 # print(answer)
 # answer = t.getRecentTweet('messi',10)
 # print(answer)
-# answer = t.getTweetInfo(1517414653340626944,'created_at','public_metrics')
+# answer = t.getTweetInfo(1517414653340626944, ['created_at', 'public_metrics'])
 # print(answer)
 # answer = t.getTweetBasic(1517414653340626944)
 # print(answer)
@@ -86,3 +87,5 @@ c = client.Client(con)
 # s = c.space
 # answer = s.getSpace('1ypKdEONEnQGW',['lang'])
 # print(answer)
+
+# %%

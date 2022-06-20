@@ -15,7 +15,8 @@ class Client():
             consumer_key = configuration.api_key,
             consumer_secret = configuration.api_key_secret,
             access_token = configuration.access_token,
-            access_token_secret = configuration.access_token_secret
+            access_token_secret = configuration.access_token_secret,
+            return_type=configuration.return_type
             )
         self.__user = User(self.__client)
         self.__list = List(self.__client)

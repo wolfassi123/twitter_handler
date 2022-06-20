@@ -21,4 +21,4 @@ con = configuration.Configuration(
 
 ## We are creating a Twitter client using the defined configuration.
 ## The twitter client is what will allow us to make API requests.
-twitter_client = client.Client(con)
+twitter_client = client.Client(con, return_type=dict)

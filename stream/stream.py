@@ -35,9 +35,9 @@ class Streamer(StreamingClient):
     def delete_all_rules(self):
         list_rules_ids = []
         all_rules = self.get_rules()
-        all_rules_data = all_rules.data
+        all_rules_data = all_rules['data']
         for rule_data in all_rules_data:
-            list_rules_ids.append(rule_data.id)
+            list_rules_ids.append(rule_data['id'])
         for id in list_rules_ids:
             print(f"Deleting the rule with the following id: {id} ")
             self.delete_rules(id)
@@ -56,7 +56,7 @@ class Streamer(StreamingClient):
 
     def show_all_rules(self):
         list_rules = []
-        rules_data = self.get_rules().data
+        rules_data = self.get_rules()['data']
         print("Here are the rules that have been defined:")
         num_rules = 0
         for rule_data in rules_data:
@@ -103,7 +103,7 @@ class Streamer(StreamingClient):
         return query
 
 
-# test = Streamer(bearer_token)
+# test = Streamer(bearer_token, return_type=dict)
 
 # test.create_rule(r_value = "Premier League",r_tag="premier_league")
 # test.create_rule(r_value = "English Football",r_tag="english_football")
